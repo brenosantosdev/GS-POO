@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Bairro</title>
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menu}"></div>
+<h1>Bairro</h1>
+<form th:action="@{/bairros/salvar}" th:object="${bairro}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <p>
+        <label>Nome: <input type="text" th:field="*{nome}"></label>
+        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" style="color:red"></span>
+    </p>
+    <p>
+        <label>Zona:
+            <select th:field="*{zona}">
+                <option value="">Selecione...</option>
+                <option th:each="z : ${zonas}" th:value="${z}" th:text="${z}"></option>
+            </select>
+        </label>
+        <span th:if="${#fields.hasErrors('zona')}" th:errors="*{zona}" style="color:red"></span>
+    </p>
+    <p>
+        <label><input type="checkbox" th:field="*{possuiPiscinao}"> Possui piscinão</label>
+    </p>
+    <button type="submit">Salvar</button>
+    <a th:href="@{/bairros}">Cancelar</a>
+</form>
+</body>
+</html>

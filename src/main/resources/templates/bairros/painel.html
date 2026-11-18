@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel do bairro</title>
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menu}"></div>
+<h1 th:text="'Painel do bairro ' + ${painel.bairroNome}"></h1>
+<p th:text="'Normal: ' + ${painel.qtdNormal} + ' | Atenção: ' + ${painel.qtdAtencao} + ' | Alerta: ' + ${painel.qtdAlerta}"></p>
+<table border="1" cellpadding="6">
+    <tr>
+        <th>Trecho</th>
+        <th>Tipo de calçada</th>
+        <th>Altitude (m)</th>
+        <th>Última lâmina (cm)</th>
+        <th>Status</th>
+    </tr>
+    <tr th:each="i : ${painel.itens}">
+        <td th:text="${i.logradouro}"></td>
+        <td th:text="${i.tipoCalcada}"></td>
+        <td th:text="${i.altitude}"></td>
+        <td th:text="${i.ultimaLamina} ?: '-'"></td>
+        <td th:text="${i.ultimoStatus} ?: '-'"></td>
+    </tr>
+</table>
+<p><a th:href="@{/bairros}">Voltar</a></p>
+</body>
+</html>

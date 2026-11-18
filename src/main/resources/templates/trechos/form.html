@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trecho</title>
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menu}"></div>
+<h1>Trecho</h1>
+<form th:action="@{/trechos/salvar}" th:object="${trecho}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <p>
+        <label>Logradouro: <input type="text" th:field="*{logradouro}"></label>
+        <span th:if="${#fields.hasErrors('logradouro')}" th:errors="*{logradouro}" style="color:red"></span>
+    </p>
+    <p>
+        <label>Bairro:
+            <select th:field="*{bairroId}">
+                <option value="">Selecione...</option>
+                <option th:each="b : ${bairros}" th:value="${b.id}" th:text="${b.nome}"></option>
+            </select>
+        </label>
+        <span th:if="${#fields.hasErrors('bairroId')}" th:errors="*{bairroId}" style="color:red"></span>
+    </p>
+    <p>
+        <label>Tipo de calçada:
+            <select th:field="*{tipoCalcada}">
+                <option value="">Selecione...</option>
+                <option th:each="c : ${tiposCalcada}" th:value="${c}" th:text="${c}"></option>
+            </select>
+        </label>
+        <span th:if="${#fields.hasErrors('tipoCalcada')}" th:errors="*{tipoCalcada}" style="color:red"></span>
+    </p>
+    <p>
+        <label>Altitude (m): <input type="number" th:field="*{altitude}"></label>
+        <span th:if="${#fields.hasErrors('altitude')}" th:errors="*{altitude}" style="color:red"></span>
+    </p>
+    <button type="submit">Salvar</button>
+    <a th:href="@{/trechos}">Cancelar</a>
+</form>
+</body>
+</html>
