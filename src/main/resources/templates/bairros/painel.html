@@ -3,12 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Painel do bairro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
 </head>
 <body>
 <div th:replace="~{fragments/menu :: menu}"></div>
-<h1 th:text="'Painel do bairro ' + ${painel.bairroNome}"></h1>
-<p th:text="'Normal: ' + ${painel.qtdNormal} + ' | Atenção: ' + ${painel.qtdAtencao} + ' | Alerta: ' + ${painel.qtdAlerta}"></p>
-<table border="1" cellpadding="6">
+<h1 th:text="'Painel · ' + ${painel.bairroNome}"></h1>
+
+<div class="cards">
+    <div class="card normal"><strong th:text="${painel.qtdNormal}"></strong><small>Normal</small></div>
+    <div class="card atencao"><strong th:text="${painel.qtdAtencao}"></strong><small>Atenção</small></div>
+    <div class="card alerta"><strong th:text="${painel.qtdAlerta}"></strong><small>Alerta</small></div>
+</div>
+
+<table>
     <tr>
         <th>Trecho</th>
         <th>Tipo de calçada</th>
@@ -21,7 +29,10 @@
         <td th:text="${i.tipoCalcada}"></td>
         <td th:text="${i.altitude}"></td>
         <td th:text="${i.ultimaLamina} ?: '-'"></td>
-        <td th:text="${i.ultimoStatus} ?: '-'"></td>
+        <td>
+            <span class="badge" th:if="${i.ultimoStatus}" th:classappend="${i.ultimoStatus}" th:text="${i.ultimoStatus}"></span>
+            <span th:unless="${i.ultimoStatus}">-</span>
+        </td>
     </tr>
 </table>
 <p><a th:href="@{/bairros}">Voltar</a></p>

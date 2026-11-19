@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" th:href="@{/css/estilo.css}">
 <head>
     <meta charset="UTF-8">
     <title>Leituras</title>
@@ -22,7 +24,7 @@
         <td th:text="${#temporals.format(l.dataHora, 'dd/MM/yyyy HH:mm')}"></td>
         <td th:text="${l.trechoDescricao}"></td>
         <td th:text="${l.laminaCm}"></td>
-        <td th:text="${l.status}"></td>
+        <td><span class="badge" th:classappend="${l.status}" th:text="${l.status}"></span></td>
         <td>
             <a th:href="@{/leituras/{id}/editar(id=${l.id})}">Editar</a>
             <form th:action="@{/leituras/{id}/excluir(id=${l.id})}" method="post"

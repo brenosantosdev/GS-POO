@@ -3,10 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Cidade em Dia de Chuva</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
 </head>
 <body>
 <div th:replace="~{fragments/menu :: menu}"></div>
-<h1>Cidade em Dia de Chuva</h1>
-<p>Acompanhe onde a água se acumula, trecho a trecho.</p>
+<div class="hero">
+    <h1>Cidade em Dia de Chuva</h1>
+    <p>Acompanhe onde a água se acumula, trecho a trecho, e saiba antes onde a cidade vai alagar.</p>
+    <a class="btn" th:href="@{/bairros}">Bairros</a>
+    <a class="btn" th:href="@{/trechos}">Trechos</a>
+    <a class="btn" th:href="@{/leituras}">Leituras</a>
+</div>
 </body>
 </html>
